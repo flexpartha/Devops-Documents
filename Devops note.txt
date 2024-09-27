@@ -1,0 +1,72 @@
+Host OS:-- This is the operating system of physical machine, operating system of LAPTOP is OS operating system. 
+Guest OS:-- is the operation system of virtual machine.
+
+snapshot:-- is a way to take backup of virtual machine.
+Hypervisor:-- is tool or software to create virtual machine.
+
+centosuser@centosvm ip address:--192.168.0.104/24 brd 192.168.0.225 --- centosVM
+
+username: - ubuntuosvm
+password:- ubuntuadmin
+
+ubuntuosvm:- ip address:--192.168.0.105/24 brd 192.168.0.225 --- ubuntuosVM
+
+how to copy file from one directory to other: cp filename destination directory like say cp devopsfile1.txt dev/
+
+create file: touch filename and multiple file touch filename{1..9}.extension
+copy directory:- cp -r copied directory to destination directory like cp -r dev backupdir/
+move directory:- mv filename destination directory like say mv devopsfile3.txt ops/
+move command also use to rename file like:- mv testfile1.txt testfile22.txt 
+
+move multiple file in particular directory:-- mv *.txt testdir
+
+remove file or directory: rm file or folder name, say:-- rm filename and rm -r folder or directory
+
+create multiple file or folder: -- mkdir test{1..20}, remove everything:- rm -r *
+
+how to install in Linux centos::-- sudo yum install vim -y
+
+VIM EDITOR COMMANDS::-- TO EDIT ANY FILE SAVE AND WRITE
+to edit the file first hit the key I
+to save the file::-- hit escape then hit ":" and then w and then hit ENTER BUTTON.
+quite from any vim editor file: hit escape key and colon button in keyboard and then hit q
+
+how to read the file using: cat filename. like cat devopsdir/mybooting.cfg or cat mybooting.cfg
+
+to open existing file:- vim filename, to rewrite or update hit I key it will insert mode.
+
+setting up line numbers in vim::--  :se nu, to go to last line::- shift + g or G, go to first line hit gg two times
+
+to copy in vim editor ::-- go to line number and hit yy 2 times and to paste hit p if you want the below any line or HIT CAP P to pasete 			   above the line
+to delete line::- hti dd 2 times undo do u, cut paste :-- dd and p
+
+LINUX GREP::-- grep command is used to find texts from any text input::
+               grep firewall filename also grep -i Firewall filename(it is for includ to filter cap as well as small letter texts).
+               to find text from directory:-- grep -iR firewall*
+	       to find text any subdirectory::-- like grep -R SELINUX /etc/*
+ 	       to donot search any text which is matching a text like::-- grep -vi firewall(case sensitivity)
+LINUX LESS::- is a reader like::-- LESS any file name
+LINUX head::-- search the first limited line for say first 2 lines or first 20 lines from a text file like head -20 filename
+LINUX tail::-- search the last limited line for say last 2 lines or last 20 lines from a text file like tail -20 filename
+
+
+INPUT OUTPUT REDIRECTION::-- overwritten the existing context of a file is like::-- ls > /tmp/sysinfo.txt
+                             for append the content use double forward arrow like::-- uptime >> /tmp/sysinfo.txt
+			     memory utilisation command::-- free -m
+                             for root partition like:: df -h
+                             for print like::-- echo "Print something"
+USER AND GROUP IN LINUX::-- to create user::-- useradd Ansible
+					       useradd aws
+					       useradd jenkings
+                             to create groups::-- groupadd devops, to add user in a specific groups::- usermod -aG devops Ansible,
+			     to delete the user::-- userdel aws
+			     to delete the group::-- groupdel devops
+
+FILE PERMISSION IN LINUX::--
+
+check the permission of directory::-- ls -ld directory name like:- ls -ld /opt/devopsdir/
+
+to show the ip address in any os::-- ip addr show
+
+TO RUN & DEPLOY IN DOCKER::-- docker-compose up
+
