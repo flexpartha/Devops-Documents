@@ -158,6 +158,8 @@ sudo rm -rf /var/www/html
 sudo yum remove httpd wget unzip -y
 ##########################################################
 
+
+#########################################################
 ##COMMAND LINE ARGUMENTS
 ##########################################################
 
@@ -178,7 +180,8 @@ echo $3
 
 
 ################################################
-RESULT:::-- ./4_args.sh AWS JENKINS
+1. EXAMPLE ONE ::-- TO EXICUTE THE SCRIPT ./4_args.sh AWS JENKINS
+#################################################################
 Value of 0 is:-
 ./4_args.sh
 Value of 1 is:-
@@ -188,5 +191,116 @@ JENKINS
 Value of 3 is:-
 
 0 is reserve for the name of the script and number 1 to 9 store command line arguments
+
+EXAMPLE TWO::-- TO EXICUTE THE SCRIPT ./5_websitesetup.sh https://www.tooplate.com/zip-templates/2108_dashboard.zip 2108_dashboard
+##################################################################################################################################
+
+#!/bin/bash
+
+## Variables Declaration
+PACKAGE="httpd wget unzip"
+SVC=" httpd"
+#URL="https://www.tooplate.com/zip-templates/2131_wedding_lite.zip"
+#ART_NAME="2131_wedding_lite"
+TEMPDIR="/tmp/webfiles"
+
+## Installing Dependencies
+echo "#############################################"
+echo "Installing packages."
+echo "#############################################"
+sudo yum install $PACKAGE -y > /dev/null
+echo
+
+## Start & Enable Service
+echo "#############################################"
+echo "Start & Enable HTTPD Service"
+echo "#############################################"
+sudo systemctl start $SVC
+sudo systemctl enable $SVC
+echo
+
+## Creating Temp Directory
+echo "#############################################"
+echo "Start Artifact Deployment"
+echo "#############################################"
+mkdir -p $TEMPDIR #####-p is if directory exists then doesn't throw error##
+cd $TEMPDIR
+echo
+
+wget $1 > /dev/null ### instead of using variable $URL use command line argument as $1 ## 
+unzip $2.zip > /dev/null ### instead of using variable $ART_NAME use command line argument as $2 ##
+sudo cp -r $2/* /var/www/html ### instead of using variable $ART_NAME use command line argument as $2 ##
+echo
+
+## Bounce Service
+echo "##############################################"
+echo "Restarting HTTPD service"
+systemctl restart $SVC
+echo
+
+## Clean UP
+echo "#############################################"
+echo "Remove Temporary Files"
+echo "#############################################"
+rm -rf $TEMPDIR
+echo
+
+systemctl status $SVC
+ls /var/www/html
+
+
+
 ##COMMAND LINE ARGUMENTS ENDS HERE
 ##########################################################
+
+##SYTEM VARIABLE
+##########################################################
+
+echo $? 0 means last execution was successful or other command is non zero means last execution was not successful.
+OTHER CUSTOM SYSTEM VARIABLE echo $USER echo $HOSTNAME echo $RANDOM
+
+##SYTEM VARIABLE ENDS HERE
+##########################################################
+
+##QUOTES
+##########################################################
+
+TWO TYPES OF QUOTES IN BASH DOUBLE QUOTES AND SINGLE QUOTES
+
+##QUOTES ENDS HERE
+##########################################################
+
+##COMMAND SUBSTITUTION
+##########################################################
+Command substitution takes command out put and store it in a variables with either `variable` or $(variable)
+
+Example::-- UP=`uptime` ### with backticks
+            echo $UP
+
+            CURRENT_USER=$(who) ### with parenthesis
+            echo $CURRENT_USER 
+Example::-- of free ram::--
+
+            free -m | grep Mem | awk '{print$4}'
+	    FREE_RAM=`free -m | grep Mem | awk '{print$4}'
+	    echo "FREE RAM IS $FREE_RAM mb."
+
+Example::-- of system info
+##############################################################
+#!/bin/bash 
+
+echo "Welcome $USER on $HOSTNAME"
+echo "########################################################"
+
+FREERAM=$(free -m | grep Mem | awk '{print$4}' )  
+LOAD=`uptime | awk '{print $9}'`
+ROOTFREE=$(df -h | grep '/dev/sdal' | awk '{print $4}')
+
+
+echo "#########################################################"
+echo "Available free RAM is $FREERAM MB"
+echo "#########################################################"
+echo "CURRENT LOAD AVERAGE $LOAD"  
+echo "#########################################################"
+echo "FREE ROOT PARTITION SIZE IS $ROOTFREE"
+             
